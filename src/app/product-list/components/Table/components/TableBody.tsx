@@ -2,7 +2,6 @@ import ProductRow from "./ProductRow";
 import { v4 as uuidv4 } from "uuid";
 import { useListContext } from "@/contexts/ListContext";
 import NoResults from "./NoResults";
-
 import getLocalStoredFavourites from "@/app/utils/getLocalStoredFavourites";
 
 function TableBody() {

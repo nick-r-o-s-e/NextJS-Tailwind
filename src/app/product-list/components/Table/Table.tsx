@@ -13,6 +13,8 @@ type Props = {
 
 function Table({ data }: Props) {
   return (
+
+    
     <ListProvider data={data}>
       <section className="bg-transperant rounded-lg mb-10 ">
         <div className="bg-gray-100 dark:bg-gray-800 relative shadow-lg rounded-lg">

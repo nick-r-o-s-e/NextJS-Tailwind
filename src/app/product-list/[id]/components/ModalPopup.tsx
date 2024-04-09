@@ -1,4 +1,4 @@
-import LinkArrowBtn from "@/app/components/LinkArrowBtn";
+import LinkArrowBtn from "@/app/components/Buttons/LinkArrowBtn";
 
 function ModalPopup() {
   return (
@@ -67,7 +67,6 @@ function ModalPopup() {
               <LinkArrowBtn
                 text="Product List"
                 href="/product-list"
-                className="flex items-center w-fit text-gray-800 bg-gray-100 hover:bg-gray-300/70 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-500 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                 dataModalHide="popup-modal"
               />
             </div>

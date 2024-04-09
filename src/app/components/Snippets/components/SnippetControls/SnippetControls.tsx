@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Dispatch, useEffect, useRef, useState } from "react";
 import { initDropdowns, initTooltips } from "flowbite";
 import { snippet } from "@/common/types";
 import CopyBtn from "./CopyBtn";
@@ -8,18 +8,37 @@ type Props = {
   activeSnippet: snippet;
   snippets: snippet[];
   handleSnippetPick: (i: number) => void;
+  setMinHeight: Dispatch<React.SetStateAction<number>>;
+  minHeight: number;
 };
 
 function SnippetControls({
   activeSnippet,
   snippets,
   handleSnippetPick,
+  setMinHeight,
+  minHeight,
 }: Props) {
-  
   useEffect(() => {
     initTooltips();
     initDropdowns();
   }, []);
+
+  const fileListRef = useRef<HTMLUListElement | null>(null);
+
+  useEffect(() => {
+    setMinHeight((prevVal) => {
+      const listHeight = fileListRef?.current?.offsetHeight;
+
+      return prevVal ? prevVal : listHeight ? listHeight + 80 : 0;
+    });
+  });
+
+  const [fileDropdownStyles, setFileDropdownStyles] = useState("opacity-0");
+
+  useEffect(() => {
+    minHeight && setFileDropdownStyles("hidden");
+  }, [minHeight]);
 
   return (
     <div className="absolute w-[calc(100%-8px)] flex justify-between gap-2 z-30 right-[14px] top-0 pt-2 pb-1 pr-1 bg-[#fafafa] dark:bg-[#282c34] shadow-[rgba(250,250,250,1)_-5px_2px_2px_0px] dark:shadow-[rgba(40,44,52,1)_-5px_2px_2px_0px]">
@@ -33,7 +52,9 @@ function SnippetControls({
         <button
           id="file-choose-dropdown-btn"
           data-dropdown-toggle="file-choose-dropdown"
-          className="text-gray-900  bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-2.5 py-1 text-center inline-flex  whitespace-nowrap  items-center dark:bg-gray-600 dark:text-gray-200  dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+          className={`${
+            !minHeight && "opacity-0"
+          } text-gray-900  bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-2.5 py-1 text-center inline-flex  whitespace-nowrap  items-center dark:bg-gray-600 dark:text-gray-200  dark:hover:bg-gray-700 dark:focus:ring-gray-800`}
           type="button"
         >
           Choose File
@@ -56,9 +77,10 @@ function SnippetControls({
 
         <div
           id="file-choose-dropdown"
-          className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+          className={`${fileDropdownStyles}  bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
         >
           <ul
+            ref={fileListRef}
             className="py-2 text-sm text-gray-700 dark:text-gray-200"
             aria-labelledby="file-choose-dropdown"
           >

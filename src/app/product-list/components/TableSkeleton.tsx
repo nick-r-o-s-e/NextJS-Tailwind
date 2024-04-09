@@ -1,11 +1,16 @@
 import React from "react";
 
-function TableSkeleton() {
+type Props = {
+  err: boolean;
+};
+
+function TableSkeleton({ err }: Props) {
   return (
-    <div className="mx-auto max-w-screen-xl lg:px-12">
+    <div className="mx-auto max-w-screen-xl mb-10">
       <div
-        role="status"
-        className="w-full divide-gray-200 dark:divide-gray-700 border bg-gray-200 dark:bg-gray-800/60 border-gray-400 divide-y  rounded-lg shadow animate-pulse   dark:border-gray-700"
+        className={`${
+          !err ? "animate-pulse" : "blur-[2px] lg:blur-[3px]"
+        } w-full divide-gray-200  dark:divide-gray-700 border bg-gray-200 dark:bg-gray-800/60 border-gray-400 divide-y  rounded-lg shadow dark:border-gray-700`}
       >
         <div className="flex p-4 flex-col gap-5 lg:flex-row lg:justify-between">
           <div className="w-full lg:max-w-[511px] h-[40px] rounded-lg bg-gray-300  dark:bg-gray-500"></div>

@@ -15,8 +15,8 @@ function PaginationFooter() {
     }
 
     const pages = Array.from({ length: pagesCount }, (_, i) => i + 1);
-
-    const length = pages.length;
+ 
+    const { length } = pages;
 
     const pageIndex = pages.indexOf(currentPage);
     if (length <= 5) {

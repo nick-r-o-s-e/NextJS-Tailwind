@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useState } from "react";
+import { ChangeEventHandler } from "react";
 
 type Props = {
   isFav: boolean;

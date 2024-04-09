@@ -1,12 +1,12 @@
-import { SVGProps } from "react";
+import { ReactNode, SVGProps } from "react";
 
 type Props = {
   active: boolean | undefined;
   svgAttrs: SVGProps<SVGSVGElement>;
-  pathAttrs: SVGProps<SVGPathElement>;
+  pathsAttrs: SVGProps<SVGPathElement>[];
 };
 
-function SideBarSvg({ active, pathAttrs, svgAttrs }: Props) {
+function SideBarSvg({ active, svgAttrs, pathsAttrs }: Props) {
   return (
     <svg
       className={`w-5 h-5 text-gray-${
@@ -19,7 +19,10 @@ function SideBarSvg({ active, pathAttrs, svgAttrs }: Props) {
       fill="currentColor"
       viewBox={svgAttrs.viewBox}
     >
-      <path {...pathAttrs} />
+      {}
+      {pathsAttrs.map((attrs, i) => (
+        <path key={i} {...attrs}></path>
+      ))}
     </svg>
   );
 }

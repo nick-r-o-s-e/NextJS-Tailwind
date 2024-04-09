@@ -1,7 +1,6 @@
 import { initTooltips } from "flowbite";
 import { useEffect, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 type Props = {
   content: string;
@@ -33,7 +32,9 @@ function CopyBtn({ content }: Props) {
         text={content}
         onCopy={async () => {
           setCopyTip("Copied");
+
           await new Promise((resolve) => setTimeout(resolve, 1500));
+
           setCopyTip(`Copy code`);
         }}
       >

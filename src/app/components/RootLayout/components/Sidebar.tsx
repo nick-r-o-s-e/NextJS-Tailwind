@@ -105,6 +105,33 @@ function Sidebar({ sidebarNavs }: Props) {
               </li>
             ))}
           </ul>
+          <ul className="mt-4 pt-4 space-y-2 font-medium border-t-2 border-gray-300 dark:border-gray-600">
+            <li>
+              <Link
+                data-drawer-hide="logo-sidebar"
+                className={`duration-200 flex items-center p-2 ${
+                  pathSegment == "/snippets" &&
+                  "bg-gray-300/70 dark:bg-gray-700"
+                } text-gray-900 rounded-lg dark:text-white hover:bg-gray-200/60 dark:hover:bg-gray-700 group`}
+                href="/snippets"
+              >
+                <SideBarSvg
+                  active={pathSegment == "/snippets"}
+                  svgAttrs={{ viewBox: "0 0 20 18" }}
+                  pathsAttrs={[
+                    {
+                      d: "M18 0H6a2 2 0 0 0-2 2h14v12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Z",
+                    },
+                    {
+                      d: "M14 4H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2ZM2 16v-6h12v6H2Z",
+                    },
+                  ]}
+                />
+
+                <span className="ms-3">Snippets</span>
+              </Link>
+            </li>
+          </ul>
         </div>
       </aside>
     </>

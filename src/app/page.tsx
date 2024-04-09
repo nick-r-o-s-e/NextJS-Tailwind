@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import TechLink from "./components/TechLink";
-import LinkArrowBtn from "./components/LinkArrowBtn";
+import LinkArrowBtn from "./components/Buttons/LinkArrowBtn";
 import AppFeatureItem from "./components/AppFeatureItem";
 
 export const metadata: Metadata = {
@@ -51,11 +51,7 @@ export default function Page() {
           so that each product would be a link to a seperate page.
         </p>
 
-        <LinkArrowBtn
-          text="See Product List"
-          href="/product-list"
-          className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
-        />
+        <LinkArrowBtn text="See Product List" href="/product-list" />
 
         <div className="py-8 md:px-3 mx-auto max-w-screen-xl lg:py-16">
           <div className="flex flex-col items-baseline text-start bg-gray-100 dark:bg-gray-800 border border-gray-400/70 shadow-lg dark:border-gray-700 rounded-lg p-8 xl:p-10 mb-8">
@@ -79,15 +75,14 @@ export default function Page() {
             <p className="text-lg font-normal text-gray-700 dark:text-gray-400 mb-6">
               Main task was to use Typescript and React, fetch data from the
               API, and display it. As a bonus, it was required to use NextJS and
-              TailwindCSS. I implemented additional filtering and sorting
-              functionality as well as pagination.
+              TailwindCSS. I implemented the debounced search with prefetched
+              links and also additional filtering and sorting functionality as
+              well as pagination. For my components, I made a code snippets
+              section for easier browsing and copying source code fetched from
+              the GitHub repository.
             </p>
 
-            <LinkArrowBtn
-              text="Source Code"
-              href="#"
-              className="inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
-            />
+            <LinkArrowBtn text="Project Repository" href="#" />
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8">
@@ -120,6 +115,8 @@ export default function Page() {
                 <AppFeatureItem text="Suspense and Error Boundaries" />
 
                 <AppFeatureItem text="Hosting app on Vercel" />
+
+                <AppFeatureItem text="Code Snippets" />
 
                 <AppFeatureItem text="Theme Toggling" />
 

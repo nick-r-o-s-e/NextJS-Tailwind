@@ -1,5 +1,5 @@
 import { DebouncedFunc } from "lodash";
-import { Dispatch, SVGProps, SetStateAction } from "react";
+import { CSSProperties, Dispatch, SVGProps, SetStateAction } from "react";
 
 export type ProductData = {
   id: string | number;
@@ -19,12 +19,15 @@ export type sidebarNav = {
   name: string;
   iconAttrs: {
     svgAttrs: SVGProps<SVGSVGElement>;
-    pathAttrs: SVGProps<SVGPathElement>;
+    pathsAttrs: SVGProps<SVGPathElement>[];
   };
 };
 
 export type ThemeContextProps = {
   mode: "light" | "dark" | null;
+  snippetTheme: {
+    [key: string]: CSSProperties;
+  };
   toggleTheme: () => void;
 };
 

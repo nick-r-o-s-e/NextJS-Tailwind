@@ -1,39 +1,63 @@
 "use client";
 
-// Components: //
-import TabBtn from "./TabBtn";
-
-// Highlight: //
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
-import "highlight.js/styles/atom-one-dark.css";
-
-// Utils, Hooks: //
-import { useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { snippet, snippetRef } from "@/common/types";
 import { useTheme } from "@/contexts/ThemeContext";
-import SnippetControls from "./SnippetControls";
-import { snippet } from "@/common/types";
+import fetchCodeSnippets from "@/api/fetchCodeSnippets";
+import TabBtn from "./TabBtn";
+import SnippetControls from "./SnippetControls/SnippetControls";
 import Highlighter from "./Highlighter";
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 type Props = {
   snippets: snippet[];
+  snippetsRefs: snippetRef[];
+  setSnippets: Dispatch<SetStateAction<snippet[] | null>>;
 };
- 
-function CodeSnippetsComponent({ snippets }: Props) {
-  const { mode } = useTheme();
 
-  const theme = mode == "dark" ? oneDark : oneLight;
+const timeoutsIds: ReturnType<typeof setTimeout>[] = [];
+
+const clearTimeouts = () => {
+  timeoutsIds.forEach((id) => clearTimeout(id));
+};
+
+function SnippetsSection({ snippets, snippetsRefs, setSnippets }: Props) {
+  const theme = useTheme();
 
   const [activeSnippet, setActiveSnippet] = useState(snippets[0]);
 
   const [loading, setLoading] = useState(true);
+
+  const [minHeight, setMinHeight] = useState(0);
+
+  const refetchData = async () => {
+    setLoading(true);
+
+    const data = await fetchCodeSnippets(snippetsRefs);
+
+    setSnippets(data);
+
+    clearTimeouts();
+
+    await new Promise((resolve) =>
+      timeoutsIds.push(
+        setTimeout(() => {
+          setLoading(false);
+          resolve;
+        }, activeSnippet.text == null ? 700 : 0)
+      )
+    );
+  };
 
   const handleSnippetPick = (i: number) => {
     setLoading(true);
 
     setActiveSnippet(snippets[i]);
   };
+
+  useEffect(() => {
+    setLoading(true);
+  }, [theme]);
 
   return (
     <section className="mb-4" id="code-snippets">
@@ -52,22 +76,25 @@ function CodeSnippetsComponent({ snippets }: Props) {
 
       <div className="relative rounded-lg overflow-hidden !rounded-tl-none">
         <SnippetControls
+          minHeight={minHeight}
+          setMinHeight={setMinHeight}
           snippets={snippets}
           activeSnippet={activeSnippet}
           handleSnippetPick={handleSnippetPick}
         />
 
         <Highlighter
+          minHeight={minHeight}
           loading={loading}
           setLoading={setLoading}
           activeSnippet={activeSnippet}
           tag={activeSnippet.langTag}
-          theme={theme}
           text={activeSnippet.text}
+          refetchData={refetchData}
         />
       </div>
     </section>
   );
 }
 
-export default CodeSnippetsComponent;
+export default SnippetsSection;

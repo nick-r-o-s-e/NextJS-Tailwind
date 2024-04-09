@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import CodeSnippets from "./components/CodeSnippets";
+import SnippetsSection from "./components/SnippetsSection";
 import SnippetsSkeleton from "./components/snippetsSkeleton/SnippetsSkeleton";
 import { snippet, snippetRef } from "@/common/types";
 import fetchCodeSnippets from "@/api/fetchCodeSnippets";
@@ -23,7 +23,15 @@ function Snippets({ snippetsRefs }: Props) {
     getData();
   }, []);
 
-  return snippets ? <CodeSnippets snippets={snippets} /> : <SnippetsSkeleton />;
+  return snippets ? (
+    <SnippetsSection
+      snippets={snippets}
+      setSnippets={setSnippets}
+      snippetsRefs={snippetsRefs}
+    />
+  ) : (
+    <SnippetsSkeleton />
+  );
 }
 
 export default Snippets;

@@ -4,6 +4,8 @@ async function fetchListData() {
   );
 
   if (!res.ok) {
+    console.log("Fetching Error: " + res);
+
     throw new Error("Failed to fetch data");
   }
 
