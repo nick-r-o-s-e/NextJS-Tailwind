@@ -3,6 +3,7 @@ import Link from "next/link";
 import TechLink from "./components/TechLink";
 import LinkArrowBtn from "./components/Buttons/LinkArrowBtn";
 import AppFeatureItem from "./components/AppFeatureItem";
+import InfoCard from "./components/InfoCard";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -48,42 +49,30 @@ export default function Page() {
         <p className="mb-8 md:px-3 text-lg font-normal text-black lg:text-xl max-w-[980px] dark:text-gray-200">
           My solution to a task where it was required to request data of the
           product list from the API and display the list with a search input and
-          so that each product would be a link to a seperate page.
+          so that each product would be a link to a separate page.
         </p>
 
         <LinkArrowBtn text="See Product List" href="/product-list" />
 
         <div className="py-8 md:px-3 mx-auto max-w-screen-xl lg:py-16">
-          <div className="flex flex-col items-baseline text-start bg-gray-100 dark:bg-gray-800 border border-gray-400/70 shadow-lg dark:border-gray-700 rounded-lg p-8 xl:p-10 mb-8">
-            <div className="bg-blue-200 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-blue-400 mb-2">
-              <svg
-                className="w-2.5 h-2.5 me-1.5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-              </svg>
-              About
-            </div>
-
-            <h1 className="text-gray-900 dark:text-white text-4xl xs:text-5xl  font-extrabold mb-3">
-              Project overview
-            </h1>
-
-            <p className="text-lg font-normal text-gray-700 dark:text-gray-400 mb-6">
-              Main task was to use Typescript and React, fetch data from the
+          <InfoCard
+            title="Project overview"
+            content="Main task was to use Typescript and React, fetch data from the
               API, and display it. As a bonus, it was required to use NextJS and
               TailwindCSS. I implemented the debounced search with prefetched
               links and also additional filtering and sorting functionality as
               well as pagination. For my components, I made a code snippets
               section for easier browsing and copying source code fetched from
-              the GitHub repository.
-            </p>
-
-            <LinkArrowBtn text="Project Repository" href="#" />
-          </div>
+              the GitHub repository."
+            type="About"
+            actionButtons={
+              <LinkArrowBtn
+                text="Project Repository"
+                target="_blank"
+                href="https://github.com/nick-r-o-s-e/NextJS-Tailwind/tree/main"
+              />
+            }
+          />
 
           <div className="grid lg:grid-cols-2 gap-8">
             <div className="flex flex-col items-baseline 600px:items-center md:items-baseline text-start bg-gray-100 dark:bg-gray-800 border border-gray-400/70 shadow-lg dark:border-gray-700 rounded-lg p-8 xl:p-10">
@@ -153,7 +142,7 @@ export default function Page() {
                   <TechLink
                     name="TypeScript"
                     href="https://www.typescriptlang.org/"
-                    iconHref="/assets/images/techIcons/typescriptIcon.svg"
+                    iconHref="/assets/images/tech-icons/typescriptIcon.svg"
                     iconClassName="h-6"
                     version="v-^5"
                   />
@@ -163,7 +152,7 @@ export default function Page() {
                   <TechLink
                     name="React"
                     href="https://react.dev/"
-                    iconHref="/assets/images/techIcons/reactIcon.svg"
+                    iconHref="/assets/images/tech-icons/reactIcon.svg"
                     iconClassName="h-6 brightness-[0.8] dark:brightness-100"
                     version="v-^18"
                   />
@@ -173,7 +162,7 @@ export default function Page() {
                   <TechLink
                     name="NextJS"
                     href="https://nextjs.org/"
-                    iconHref="/assets/images/techIcons/nextjsIcon.svg"
+                    iconHref="/assets/images/tech-icons/nextjsIcon.svg"
                     iconClassName="h-6"
                     version="v-14.0.1"
                   />
@@ -183,7 +172,7 @@ export default function Page() {
                   <TechLink
                     name="TailwindCSS"
                     href="https://tailwindcss.com/"
-                    iconHref="/assets/images/techIcons/tailwindIcon.svg"
+                    iconHref="/assets/images/tech-icons/tailwindIcon.svg"
                     iconClassName="h-6"
                     version="v-^3.3.5"
                   />
@@ -193,7 +182,7 @@ export default function Page() {
                   <TechLink
                     name="Vercel"
                     href="https://vercel.com/"
-                    iconHref="/assets/images/techIcons/vercelIcon.svg"
+                    iconHref="/assets/images/tech-icons/vercelIcon.svg"
                     iconClassName="h-5"
                     version="v-^3.3.5"
                   />

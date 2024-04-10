@@ -14,7 +14,8 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        body_bg: "url('/assets/images/food-texture.png')",
+        body_bg: "url('/assets/images/body-bg.png')",
+        
       },
       keyframes: {
         appear: {

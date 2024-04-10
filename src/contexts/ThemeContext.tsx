@@ -1,16 +1,13 @@
 "use client";
 
 import getInitialThemeMode from "@/app/utils/getInitialThemeMode";
-import { ThemeContextProps } from "@/common/types";
+import { ThemeContextProps, ThemeMode, ThemeProviderProps } from "@/common/types";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import {
   oneDark,
   oneLight,
 } from "react-syntax-highlighter/dist/esm/styles/prism";
-
-type ThemeProviderProps = {
-  children?: React.ReactNode;
-};
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
@@ -25,7 +22,7 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const [mode, setMode] = useState<"light" | "dark" | null>(null);
+  const [mode, setMode] = useState<ThemeMode | null>(null);
 
   const snippetTheme = mode == "dark" ? oneDark : oneLight;
 

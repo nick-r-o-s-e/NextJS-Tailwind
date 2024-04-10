@@ -5,6 +5,7 @@ import CurrencyInput from "react-currency-input-field";
 import RangeSlider from "./components/RangeSlider";
 import { useListContext } from "@/contexts/ListContext";
 import { initDropdowns } from "flowbite";
+import { isMobile } from "react-device-detect";
 
 function TableControls() {
   const {
@@ -72,29 +73,26 @@ function TableControls() {
 
     let newPrice = { ...filterValues.price };
 
-    if (target == "min") {
-      if (value == 0) {
-        newPrice.min = String(val).replace("-", "");
-      } else if (value >= Number(max)) {
-        newPrice.max = maxPrice;
-        newPrice.min = Math.min(value, maxPrice - 0.01);
-      } else {
-        newPrice.min = Math.max(minPrice, Math.min(value, Number(max) - 0.01));
-      }
-    } else {
-      if (value == 0) {
-        newPrice.max = String(val).replace("-", "");
-        newPrice.min = minPrice;
-      } else if (value <= Number(min)) {
-        newPrice.min = minPrice;
-        newPrice.max = Math.max(value, minPrice + 0.01);
-      } else {
-        newPrice.max = Math.min(maxPrice, Math.max(value, Number(min) + 0.01));
-      }
-    }
+    if (["", "-", "."].includes(String(val))) {
+      newPrice[target] = val;
 
-    if (String(val).includes(".") && !String(newPrice[target]).includes(".")) {
-      newPrice[target] = String(newPrice[target]) + ".";
+      target == "max" && (newPrice.min = minPrice);
+    } else {
+      if (target == "min") {
+        if (value >= Number(max)) {
+          newPrice.max = maxPrice;
+          newPrice.min = Math.min(value, maxPrice - 0.01);
+        } else {
+          newPrice.min = val;
+        }
+      } else {
+        if (value <= Number(min)) {
+          newPrice.min = minPrice;
+          newPrice.max = val;
+        } else {
+          newPrice.max = value > maxPrice ? maxPrice : val;
+        }
+      }
     }
 
     setFilterValues((prevVal) => ({
@@ -150,52 +148,88 @@ function TableControls() {
                 filterPrice={filterValues.price}
                 updateFilterPrice={updateFilterPriceValues}
               />
-              <div className="flex  max-3xs:flex-col gap-4">
-                <div>
-                  <label
-                    htmlFor="input-min-price"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    From:
-                  </label>
+              <div className="flex items-center max-3xs:flex-col justify-between w-full gap-4">
+                {isMobile ? (
+                  <>
+                    {" "}
+                    <p className="text-slate-700 dark:text-slate-300  flex-nowrap ">
+                      From:{" "}
+                      <span className="text-black dark:text-white font-semibold">
+                        {filterValues.price.min}
+                      </span>{" "}
+                      <span className="text-xs">EUR</span>
+                    </p>
+                    <p className="text-slate-700 dark:text-slate-300 flex-nowrap text-md">
+                      To:{" "}
+                      <span className="text-black dark:text-white text-sm inline-block font-semibold">
+                        {filterValues.price.max}
+                      </span>{" "}
+                      <span className="text-xs">EUR</span>
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <div>
+                      <label
+                        htmlFor="input-min-price"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        From:
+                      </label>
 
-                  <CurrencyInput
-                    id="input-min-price"
-                    onBlur={(e) => {
-                      e.target.value == "" &&
-                        updateFilterPriceValues("min", minPrice);
-                    }}
-                    placeholder={String(minPrice)}
-                    ref={minPriceRef}
-                    value={filterValues.price.min}
-                    className="bg-gray-50 border border-gray-300 max-w-[125px] text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800/60 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    onValueChange={(value) => {
-                      updateFilterPriceValues("min", value || "");
-                    }}
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="input-max-price"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    To:
-                  </label>
-                  <CurrencyInput
-                    id="input-max-price"
-                    onBlur={(e) => {
-                      e.target.value == "" &&
-                        updateFilterPriceValues("max", maxPrice);
-                    }}
-                    placeholder={String(maxPrice)}
-                    ref={maxPriceRef}
-                    value={filterValues.price.max}
-                    className="bg-gray-50 border border-gray-300 max-w-[125px] text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800/60 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    onValueChange={(value) => {
-                      updateFilterPriceValues("max", value || "");
-                    }}
-                  />
-                </div>
+                      <CurrencyInput
+                        id="input-min-price"
+                        onBlur={(e) => {
+                          [".", "-", ""].includes(e.target.value) &&
+                            updateFilterPriceValues("min", minPrice);
+                        }}
+                        allowNegativeValue={false}
+                        placeholder={String(minPrice)}
+                        ref={minPriceRef}
+                        value={filterValues.price.min}
+                        onChange={(e) => {
+                          e.preventDefault();
+                        }}
+                        onFocus={(e) => {
+                          e.preventDefault();
+                        }}
+                        className="bg-gray-50 border border-gray-300 max-w-[125px] text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800/60 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        onValueChange={(value) => {
+                          updateFilterPriceValues("min", value || "");
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="input-max-price"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        To:
+                      </label>
+                      <CurrencyInput
+                        id="input-max-price"
+                        onBlur={(e) => {
+                          [".", "-", ""].includes(e.target.value) &&
+                            updateFilterPriceValues("max", maxPrice);
+                        }}
+                        allowNegativeValue={false}
+                        placeholder={String(maxPrice)}
+                        ref={maxPriceRef}
+                        value={filterValues.price.max}
+                        onChange={(e) => {
+                          e.preventDefault();
+                        }}
+                        onFocus={(e) => {
+                          e.preventDefault();
+                        }}
+                        className="bg-gray-50 border border-gray-300 max-w-[125px] text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800/60 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        onValueChange={(value) => {
+                          updateFilterPriceValues("max", value || "");
+                        }}
+                      />
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

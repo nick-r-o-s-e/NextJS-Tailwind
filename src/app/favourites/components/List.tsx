@@ -2,7 +2,8 @@
 
 import { ProductData } from "@/common/types";
 import FavoriteCard from "./FavoriteCard";
-import AddFavsCard from "./AddFavsCard";
+import InfoCard from "@/app/components/InfoCard";
+import LinkArrowBtn from "@/app/components/Buttons/LinkArrowBtn";
 
 type Props = {
   products: ProductData[];
@@ -16,7 +17,19 @@ function List({ products }: Props) {
   const favs = products.filter((item) => favouritesIds.includes(item.id));
 
   if (favs.length == 0) {
-    return <AddFavsCard />;
+    return (
+      <div className="mx-auto flex justify-self center max-w-[740px] ">
+        <InfoCard
+          title="Find your favourites now!"
+          content="You have not yet added any product to your favourite list, you can do
+          it by visiting the product list."
+          type="Info"
+          actionButtons={
+            <LinkArrowBtn text="See Product List" href="/product-list" />
+          }
+        />
+      </div>
+    );
   }
 
   return (

@@ -23,7 +23,7 @@ function Snippets({ snippetsRefs }: Props) {
     getData();
   }, []);
 
-  return snippets ? (
+  return !(snippets == null) ? (
     <SnippetsSection
       snippets={snippets}
       setSnippets={setSnippets}

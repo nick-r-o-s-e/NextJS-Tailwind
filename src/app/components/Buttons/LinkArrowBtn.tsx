@@ -1,17 +1,20 @@
 import Link from "next/link";
+import { HTMLAttributeAnchorTarget } from "react";
 
 type Props = {
   text: string;
   href: string;
+  target?: HTMLAttributeAnchorTarget | undefined;
   dataModalHide?: string;
 };
 
-function LinkArrowBtn({ href, dataModalHide, text }: Props) {
+function LinkArrowBtn({ href, dataModalHide, text, target }: Props) {
   return (
     <Link
       type="button"
+      target={target || "_self"}
       href={href}
-      className="inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center duration-200 text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
+      className="inline-flex justify-center items-center py-2.5 px-5 text-sm sm:text-base font-medium text-center duration-200 text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
       data-modal-hide={dataModalHide}
     >
       {text}

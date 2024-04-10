@@ -1,4 +1,3 @@
-import React from "react";
 import LinkArrowBtn from "./components/Buttons/LinkArrowBtn";
 
 function NotFound() {

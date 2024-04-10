@@ -15,7 +15,7 @@ function PaginationFooter() {
     }
 
     const pages = Array.from({ length: pagesCount }, (_, i) => i + 1);
- 
+
     const { length } = pages;
 
     const pageIndex = pages.indexOf(currentPage);
@@ -59,7 +59,7 @@ function PaginationFooter() {
       <ul className="inline-flex items-stretch -space-x-px">
         <li>
           <button
-            disabled={currentPage == 1}
+            disabled={!(currentPage - 1)}
             onClick={() => {
               setCurrentPage((prevVal) => Math.max(1, prevVal - 1));
             }}
@@ -109,7 +109,7 @@ function PaginationFooter() {
 
         <li>
           <button
-            disabled={currentPage == pagesCount}
+            disabled={!pagesCount || currentPage == pagesCount}
             onClick={() => {
               setCurrentPage((prevVal) => Math.min(pagesCount, prevVal + 1));
             }}

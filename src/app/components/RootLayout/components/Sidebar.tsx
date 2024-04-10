@@ -131,6 +131,29 @@ function Sidebar({ sidebarNavs }: Props) {
                 <span className="ms-3">Snippets</span>
               </Link>
             </li>
+
+            <li>
+              <Link
+                data-drawer-hide="logo-sidebar"
+                className={`duration-200 flex items-center p-2 ${
+                  pathSegment == "/other-files" &&
+                  "bg-gray-300/70 dark:bg-gray-700"
+                } text-gray-900 rounded-lg dark:text-white hover:bg-gray-200/60 dark:hover:bg-gray-700 group`}
+                href="/other-files"
+              >
+                <SideBarSvg
+                  active={pathSegment == "/other-files"}
+                  svgAttrs={{ viewBox: "0 0 24 24" }}
+                  pathsAttrs={[
+                    {
+                      d: "M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7Zm-.293 9.293a1 1 0 0 1 0 1.414L9.414 14l1.293 1.293a1 1 0 0 1-1.414 1.414l-2-2a1 1 0 0 1 0-1.414l2-2a1 1 0 0 1 1.414 0Zm2.586 1.414a1 1 0 0 1 1.414-1.414l2 2a1 1 0 0 1 0 1.414l-2 2a1 1 0 0 1-1.414-1.414L14.586 14l-1.293-1.293Z",
+                    },
+                  ]}
+                />
+
+                <span className="ms-3">Other Files</span>
+              </Link>
+            </li>
           </ul>
         </div>
       </aside>

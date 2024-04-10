@@ -3,7 +3,6 @@
 // Components: //
 import BuyBtn from "./BuyBtn";
 import ModalPopup from "./ModalPopup";
-import LinkArrowBtn from "@/app/components/Buttons/LinkArrowBtn";
 import HeartCheckbox from "@/app/components/HeartCheckbox";
 import SizedTitle from "@/app/components/SizedTitle";
 
@@ -16,7 +15,8 @@ import getLocalStoredFavourites from "@/app/utils/getLocalStoredFavourites";
 import handleFavouriteChange from "@/app/utils/handleFavouriteChange";
 import { initTooltips } from "flowbite";
 import Link from "next/link";
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+import { isMobile } from "react-device-detect";
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 type Props = {
   product: ProductData;
@@ -122,13 +122,16 @@ function ExtendedProduct({ product }: Props) {
             data-tooltip-target="tooltip-add-fav"
             data-tooltip-placement="right"
           >
-            <div
-              id="tooltip-add-fav"
-              role="tooltip"
-              className="absolute z-10 invisible inline-block px-3 py-[0.3rem] text-sm font-medium text-white transition-opacity duration-300 bg-gray-500 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-600"
-            >
-              {addFavTip}
-            </div>
+            {!isMobile && (
+              <div
+                id="tooltip-add-fav"
+                role="tooltip"
+                className="absolute z-10 invisible inline-block px-3 py-[0.3rem] text-sm font-medium text-white transition-opacity duration-300 bg-gray-500 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-600"
+              >
+                {addFavTip}
+              </div>
+            )}
+
             <HeartCheckbox
               isFav={isFavourite}
               onChange={handleFavChange}

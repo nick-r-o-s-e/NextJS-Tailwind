@@ -20,7 +20,7 @@ function Table({ data }: Props) {
         <div className="bg-gray-100 dark:bg-gray-800 relative shadow-lg rounded-lg">
           <TableControls />
 
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto relative">
             <table className="w-full text-sm text-left text-gray-600 dark:text-gray-400">
               <TableHead />
 

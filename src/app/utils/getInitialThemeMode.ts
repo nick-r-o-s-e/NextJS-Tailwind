@@ -1,8 +1,6 @@
-const getInitialThemeMode = () =>
-  localStorage.getItem("color-theme") === "dark" ||
-  (!("color-theme" in localStorage) &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ? "dark"
-    : "light";
+import { ThemeMode } from "@/common/types";
+
+const getInitialThemeMode = (): ThemeMode =>
+  <"light" | "dark">localStorage.getItem("color-theme") || "dark";
 
 export default getInitialThemeMode;

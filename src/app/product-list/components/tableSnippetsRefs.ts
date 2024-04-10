@@ -1,4 +1,4 @@
-export const tableCodeSnippets = [
+export const tableSnippetsRefs = [
   {
     filename: "ListContext.tsx",
     langTag: "tsx",

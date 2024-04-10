@@ -19,7 +19,7 @@ function ErrMsg({ sourceUrl, handleRefresh }: Props) {
         sizeClasses="w-9 h-9 md:w-12 md:h-12"
       />
 
-      <LinkArrowBtn text="See on GitHub" href={sourceUrl} />
+      <LinkArrowBtn text="See on GitHub" target="_blank" href={sourceUrl} />
     </div>
   );
 }

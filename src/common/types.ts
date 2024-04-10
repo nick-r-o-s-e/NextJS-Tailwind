@@ -1,18 +1,7 @@
 import { DebouncedFunc } from "lodash";
 import { CSSProperties, Dispatch, SVGProps, SetStateAction } from "react";
 
-export type ProductData = {
-  id: string | number;
-  name: string;
-  price: number;
-  currency: string;
-  category: string;
-  description: string;
-};
-
-export type ListData = {
-  products: ProductData[];
-};
+//~~~ Root Layout: ~~~//
 
 export type sidebarNav = {
   path: string;
@@ -23,20 +12,25 @@ export type sidebarNav = {
   };
 };
 
+//~~~ Context : ~~~//
+
+export type ThemeProviderProps = {
+  children?: React.ReactNode;
+};
+
+export type ThemeMode = "light" | "dark"
+
 export type ThemeContextProps = {
-  mode: "light" | "dark" | null;
+  mode: ThemeMode | null;
   snippetTheme: {
     [key: string]: CSSProperties;
   };
   toggleTheme: () => void;
 };
 
-export type FilterValues = {
-  price: {
-    min: string | number;
-    max: string | number;
-  };
-  categories: string[];
+export type ListProviderProps = {
+  children?: React.ReactNode;
+  data: ProductData[];
 };
 
 export type ListContextProps = {
@@ -56,6 +50,31 @@ export type ListContextProps = {
   visibleRows: ProductData[];
   categoriesWithCount: [string, number][];
 };
+
+//~~~ Product List: ~~~//
+
+export type ProductData = {
+  id: string | number;
+  name: string;
+  price: number;
+  currency: string;
+  category: string;
+  description: string;
+};
+
+export type ListData = {
+  products: ProductData[];
+};
+
+export type FilterValues = {
+  price: {
+    min: string | number;
+    max: string | number;
+  };
+  categories: string[];
+};
+
+//~~~ Snippets: ~~~//
 
 export type snippetRef = {
   filename: string;

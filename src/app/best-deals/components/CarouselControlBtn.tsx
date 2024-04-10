@@ -8,7 +8,7 @@ function CarouselControlBtn({ action }: Props) {
   return (
     <button
       type="button"
-      className={`absolute top-0 ${side}-0 z-30 flex items-center justify-center h-full px-2 lg:px-4 cursor-pointer group`}
+      className={`absolute top-0 ${side}-0 z-30 outline-none flex items-center justify-center h-full px-2 lg:px-4 cursor-pointer group`}
       {...{ [`data-carousel-${action == "Previous" ? "prev" : "next"}`]: true }}
     >
       <span className="inline-flex items-center justify-center w-6 h-6 lg:w-10 lg:h-10 rounded-full bg-gray-400/30 dark:bg-white/20 group-hover:bg-gray-400/60 dark:group-hover:bg-white/40 group-focus:ring-4 group-focus:ring-gray-200 dark:group-focus:ring-gray-700/70 group-focus:outline-none">

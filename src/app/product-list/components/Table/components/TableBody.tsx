@@ -12,7 +12,7 @@ function TableBody() {
   const favouriteIds = getLocalStoredFavourites();
 
   return (
-    <tbody className="relative">
+    <tbody>
       {visibleRows.map((item) => (
         <ProductRow
           key={item.id}

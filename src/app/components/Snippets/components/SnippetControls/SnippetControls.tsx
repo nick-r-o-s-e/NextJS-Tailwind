@@ -3,6 +3,8 @@ import { initDropdowns, initTooltips } from "flowbite";
 import { snippet } from "@/common/types";
 import CopyBtn from "./CopyBtn";
 import Link from "next/link";
+import { isMobile } from "react-device-detect";
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 type Props = {
   activeSnippet: snippet;
@@ -26,6 +28,8 @@ function SnippetControls({
 
   const fileListRef = useRef<HTMLUListElement | null>(null);
 
+  //~~~ Set minHeight of the content based on how tall is file choose dropdown list,
+  //~~~ to fit it inside the box with overlay: hidden
   useEffect(() => {
     setMinHeight((prevVal) => {
       const listHeight = fileListRef?.current?.offsetHeight;
@@ -36,12 +40,16 @@ function SnippetControls({
 
   const [fileDropdownStyles, setFileDropdownStyles] = useState("opacity-0");
 
+  //~~~ Render list to have value for the minHeight before hiding dropdown menu ~~~//
   useEffect(() => {
     minHeight && setFileDropdownStyles("hidden");
   }, [minHeight]);
 
   return (
-    <div className="absolute w-[calc(100%-8px)] flex justify-between gap-2 z-30 right-[14px] top-0 pt-2 pb-1 pr-1 bg-[#fafafa] dark:bg-[#282c34] shadow-[rgba(250,250,250,1)_-5px_2px_2px_0px] dark:shadow-[rgba(40,44,52,1)_-5px_2px_2px_0px]">
+    <div
+      className="absolute w-[calc(100%-8px)] flex justify-between gap-2 z-30 top-0 pt-2 pb-1 pr-1 bg-[#fafafa] dark:bg-[#282c34] shadow-[rgba(250,250,250,1)_-5px_2px_2px_0px] dark:shadow-[rgba(40,44,52,1)_-5px_2px_2px_0px]"
+      style={{ right: isMobile ? 0 : "10px" }}
+    >
       <span className="ml-4 h-fit rounded-lg text-gray-900 dark:text-gray-400/70 bg-[#efefef] dark:bg-[#333B49] px-2 py-1 text-xs uppercase">
         {activeSnippet.langTag}
       </span>
@@ -111,13 +119,16 @@ function SnippetControls({
             data-tooltip-placement="bottom"
             className="relative text-gray-900  bg-gray-200 hover:bg-gray-300 focus:ring-4  focus:ring-gray-100  font-medium rounded-lg text-sm p-1 text-center inline-flex items-center dark:bg-gray-600 dark:text-gray-200  dark:hover:bg-gray-700 dark:focus:ring-gray-800"
           >
-            <div
-              id="tooltip-source-code"
-              role="tooltip"
-              className="absolute z-10 invisible inline-block !top-10 !left-[100%] !translate-x-[-100%] !translate-y-0 w-max px-3 py-[0.3rem] text-sm font-medium text-black dark:text-white transition-opacity duration-300 bg-gray-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-600"
-            >
-              See on GitHub
-            </div>
+            {!isMobile && (
+              <div
+                id="tooltip-source-code"
+                role="tooltip"
+                className="absolute z-10 invisible inline-block !top-10 !left-[100%] !translate-x-[-100%] !translate-y-0 w-max px-3 py-[0.3rem] text-sm font-medium text-black dark:text-white transition-opacity duration-300 bg-gray-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-600"
+              >
+                See on GitHub
+              </div>
+            )}
+
             <svg
               className="w-[1.5rem] h-[1.5rem] text-gray-800 dark:text-gray-200"
               aria-hidden="true"

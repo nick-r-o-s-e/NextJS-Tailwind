@@ -4,9 +4,9 @@ import TableSkeleton from "./components/TableSkeleton";
 import fetchListData from "@/api/fetchListData";
 import ProductList from "./components/ProductList";
 import Snippets from "../components/Snippets/Snippets";
-import { tableCodeSnippets } from "./components/TableCodeSnippets";
+import { tableSnippetsRefs } from "./components/tableSnippetsRefs";
 
-export async function PageContent() {
+async function PageContent() {
   const products: ProductData[] = await fetchListData()
     .then((data) => data.products)
     .catch(() => {
@@ -15,8 +15,8 @@ export async function PageContent() {
 
   return (
     <>
-      <ProductList data={products} />;
-      <Snippets snippetsRefs={tableCodeSnippets} />
+      <ProductList data={products} />
+      <Snippets snippetsRefs={tableSnippetsRefs} />
     </>
   );
 }

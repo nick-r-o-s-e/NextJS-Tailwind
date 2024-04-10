@@ -47,12 +47,11 @@ function RangeSlider({ min, max, updateFilterPrice, filterPrice }: Props) {
         max={max}
         step="0.01"
         value={Number(filterPrice.min)}
+        onTouchStart={(e)=>{e.preventDefault()}}
         onChange={(event) => {
-          const value = Math.min(Number(event.target.value), max - 0.01);
-
-          updateFilterPrice("min", value);
+          updateFilterPrice("min", event.target.value);
         }}
-        className="thumb thumb--left z-[3] pointer-events-none appearance-none absolute h-0 w-[92%] left-0"
+        className="thumb thumb--left z-[3] appearance-none pointer-events-none outline-none absolute h-0 w-[92%] left-0"
       />
 
       {/* Max slider input */}
@@ -62,12 +61,12 @@ function RangeSlider({ min, max, updateFilterPrice, filterPrice }: Props) {
         max={max}
         step="0.01"
         value={Number(filterPrice.max)}
-        onChange={(event) => { 
-          const value = Math.max(Number(event.target.value), min + 0.01);
+        onTouchStart={(e)=>{e.preventDefault()}}
 
-          updateFilterPrice("max", value);
+        onChange={(event) => {
+          updateFilterPrice("max", event.target.value);
         }}
-        className="thumb thumb--right z-[3] appearance-none pointer-events-none absolute right-0 h-0 w-[92%] "
+        className="thumb thumb--right z-[3] appearance-none pointer-events-none outline-none absolute right-0 h-0 w-[92%] "
       />
 
       {/* Slider line */}

@@ -1,6 +1,7 @@
 import { initTooltips } from "flowbite";
 import { useEffect, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { isMobile } from "react-device-detect";
 
 type Props = {
   content: string;
@@ -20,13 +21,15 @@ function CopyBtn({ content }: Props) {
       className="duration-100 text-gray-400 hover:text-blue-600 dark:text-gray-500  dark:hover:text-blue-700  font-medium rounded-lg text-xs  text-center inline-flex items-center  "
       data-tip={copyTip}
     >
-      <div
-        id="tooltip-copy-snippet"
-        role="tooltip"
-        className="absolute z-10 invisible inline-block  w-max px-3 py-[0.3rem] text-sm font-medium text-black dark:text-white transition-opacity duration-300 bg-gray-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-600"
-      >
-        {copyTip}
-      </div>
+      {!isMobile && (
+        <div
+          id="tooltip-copy-snippet"
+          role="tooltip"
+          className="absolute z-10 invisible inline-block  w-max px-3 py-[0.3rem] text-sm font-medium text-black dark:text-white transition-opacity duration-300 bg-gray-200 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-600"
+        >
+          {copyTip}
+        </div>
+      )}
 
       <CopyToClipboard
         text={content}

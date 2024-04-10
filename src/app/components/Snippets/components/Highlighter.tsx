@@ -61,13 +61,13 @@ function Highlighter({
       <SyntaxHighlighter
         language={tag}
         style={theme}
-        className="max-h-[700px]  text-xs 2xs:text-sm lg:text-base !rounded-none scrollbar-thin scrollbar-corner-gray-200 dark:scrollbar-corner-gray-800 scrollbar-thumb-[#bcc1c7] scrollbar-track-gray-200 dark:scrollbar-thumb-slate-700 dark:scrollbar-track-gray-800 overflow-auto"
+        className="max-h-[700px]  text-[0.6rem] 2xs:text-[0.73rem] lg:text-base !rounded-none scrollbar-thin scrollbar-corner-gray-200 dark:scrollbar-corner-gray-800 scrollbar-thumb-[#bcc1c7] scrollbar-track-gray-200 dark:scrollbar-thumb-slate-700 dark:scrollbar-track-gray-800 overflow-auto"
         customStyle={{
           minHeight: Math.max(
             contentSkeletonRef.current?.offsetHeight || 0,
             minHeight
           ),
-          paddingTop: "2.7rem",
+          paddingTop: "2.8rem",
           paddingBottom: "0.6rem",
           margin: "0",
         }}
@@ -76,7 +76,7 @@ function Highlighter({
         {text || ""}
       </SyntaxHighlighter>
       {err && (
-        <ErrMsg handleRefresh={refetchData} sourceUrl="activeSnippet.url" />
+        <ErrMsg handleRefresh={refetchData} sourceUrl={activeSnippet.url} />
       )}
     </div>
   );

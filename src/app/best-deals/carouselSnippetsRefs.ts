@@ -1,4 +1,4 @@
-export const CarouselSnippets = [
+export const carouselSnippetsRefs = [
   {
     filename: "Carousel.tsx",
     langTag: "tsx",

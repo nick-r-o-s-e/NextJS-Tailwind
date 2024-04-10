@@ -5,8 +5,8 @@ import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { createContext } from "react";
 import debounce from "lodash.debounce";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ListContextProps, ProductData } from "@/common/types";
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+import { ListContextProps, ListProviderProps } from "@/common/types";
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 export const ListContext = createContext<ListContextProps | null>(null);
 
@@ -20,12 +20,7 @@ export const useListContext = () => {
   return context;
 };
 
-type Props = {
-  children?: React.ReactNode;
-  data: ProductData[];
-};
-
-export const ListProvider = ({ data, children }: Props) => {
+export const ListProvider = ({ data, children }: ListProviderProps) => {
   const router = useRouter();
 
   const searchParams = useSearchParams();

@@ -5,22 +5,16 @@ import { initCarousels } from "flowbite";
 import { ProductData } from "@/common/types";
 import CarouselControlBtn from "./CarouselControlBtn";
 import CarouselCard from "./CarouselCard/CarouselCard";
-import ErrCard from "@/app/components/ErrCard";
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 type Props = {
-  products: ProductData[] | null;
-  errMsg: string;
+  products: ProductData[];
 };
 
-function Carousel({ products, errMsg }: Props) {
+function Carousel({ products }: Props) {
   useEffect(() => {
     initCarousels();
   }, []);
-
-  if (!products) {
-    return <ErrCard errMsg={errMsg} />;
-  }
 
   const cheapestN = (n: number) =>
     products.sort((a, b) => a.price - b.price).slice(0, n);
