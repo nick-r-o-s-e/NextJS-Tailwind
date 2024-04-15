@@ -1,8 +1,7 @@
 # NextJS - TailwindCSS 
 
 ## Hosted App 
-<a href="https://next-js-tailwind-list.vercel.app/" target="_blank">next-js-tailwind-list.vercel.app</a>
-
+[next-js-tailwind-list.vercel.app](https://next-js-tailwind-list.vercel.app)
 
 ## Table of Contents
 * [App Features](#app-features)
@@ -65,9 +64,9 @@ My solution to a task where it was required to request data of the product list 
 </table>
 
 ## Code Snippets 
-- ### <a href="https://next-js-tailwind-list.vercel.app/snippets" target="_blank">visit hosted component →</a>
+- ### [visit hosted component →](https://next-js-tailwind-list.vercel.app/snippets)
 
-This is a component that allows you to fetch code from GitHub repository and place it in tabs for viewing and copying. Loading and Error boundaries are also considered, as is a corresponding change of theme with optimized highlighting rendering. For colored code highlighting was used <a href="https://www.npmjs.com/package/react-syntax-highlighter" target="_blank">react-syntax-highlighting</a> package.
+This is a component that allows you to fetch code from GitHub repository and place it in tabs for viewing and copying. Loading and Error boundaries are also considered, as is a corresponding change of theme with optimized highlighting rendering. For colored code highlighting was used [react-syntax-highlighting](https://www.npmjs.com/package/react-syntax-highlighter) package.
 
 ## Project Status
 Project is in progress
